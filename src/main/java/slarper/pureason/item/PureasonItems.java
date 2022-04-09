@@ -1,6 +1,7 @@
 package slarper.pureason.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -9,13 +10,17 @@ import slarper.pureason.Pureason;
 
 public class PureasonItems {
     public static void load(){}
-    public static final Item Spell;
+    public static final Item SPELL;
+    public static final Item PULLABLE_SPELL;
+    public static final Item EXAMPLE_BOW;
 
     private static Item register(String id, Item item){
         return Registry.register(Registry.ITEM, new Identifier(Pureason.MODID, id), item);
     }
 
     static {
-        Spell = register("spell", new SpellItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
+        SPELL = register("spell", new SpellItem(new FabricItemSettings().maxCount(1)));
+        PULLABLE_SPELL = register("pullable_spell",new PullableSpellItem(new FabricItemSettings().maxCount(1)));
+        EXAMPLE_BOW = register("example_bow",new BowItem(new FabricItemSettings().maxDamage(300)));
     }
 }

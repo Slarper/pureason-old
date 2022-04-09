@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "slarper.pureason.Pureason"
+    ],
+    "client": [
+      "slarper.pureason.client.PureasonClient"
     ]
   },
   "mixins": [
