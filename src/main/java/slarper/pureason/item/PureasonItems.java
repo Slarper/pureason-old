@@ -12,7 +12,6 @@ public class PureasonItems {
     public static void load(){}
     public static final Item SPELL;
     public static final Item PULLABLE_SPELL;
-    public static final Item EXAMPLE_BOW;
 
     private static Item register(String id, Item item){
         return Registry.register(Registry.ITEM, new Identifier(Pureason.MODID, id), item);
@@ -21,6 +20,5 @@ public class PureasonItems {
     static {
         SPELL = register("spell", new SpellItem(new FabricItemSettings().maxCount(1)));
         PULLABLE_SPELL = register("pullable_spell",new PullableSpellItem(new FabricItemSettings().maxCount(1)));
-        EXAMPLE_BOW = register("example_bow",new BowItem(new FabricItemSettings().maxDamage(300)));
     }
 }
