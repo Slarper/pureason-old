@@ -1,36 +1,37 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "pureason",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Pureason Mod",
+  "description": "A magic mod by Slarper on github",
   "authors": [
-    "Me!"
+    "Slarper on github"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Slarper/pureason",
+    "sources": "https://github.com/Slarper/pureason"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/pureason/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "slarper.pureason.Pureason"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "pureason.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
     "minecraft": "1.18.x",
-    "java": ">=17"
+    "java": ">=17",
+    "nbtmodel":">=1.3.0"
   },
   "suggests": {
     "another-mod": "*"
