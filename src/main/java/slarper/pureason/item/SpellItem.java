@@ -9,6 +9,7 @@ import slarper.pureason.Pureason;
 // deprecated.
 public class SpellItem extends Item {
     private static final String SPELL_ID_KEY = "SpellId";
+    public static final String MAGIC_KEY = "magic";
 
     public SpellItem(Settings settings) {
         super(settings);

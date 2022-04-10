@@ -24,7 +24,7 @@ public class TargetSpellItem extends SpellItem{
             context.getPlayer().swingHand(context.getHand());
         }
 
-        NbtCompound nbt = context.getStack().getOrCreateSubNbt("magic");
+        NbtCompound nbt = context.getStack().getOrCreateSubNbt(SpellItem.MAGIC_KEY);
         if (nbt==null || nbt.isEmpty()){
             return super.useOnBlock(context);
         }
@@ -38,7 +38,7 @@ public class TargetSpellItem extends SpellItem{
             user.swingHand(hand);
         }
 
-        NbtCompound nbt = stack.getOrCreateSubNbt("magic");
+        NbtCompound nbt = stack.getOrCreateSubNbt(SpellItem.MAGIC_KEY);
         if (nbt.isEmpty()){
             return super.useOnEntity(stack, user, entity, hand);
         }

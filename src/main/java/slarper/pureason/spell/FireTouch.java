@@ -28,10 +28,6 @@ public class FireTouch implements CastOnEntityCallback, CastOnBlockCallback {
     @Override
     public ActionResult onEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand, @NotNull NbtCompound nbt) {
 
-        // first : is nbt contains key.
-        if (!nbt.contains(KEY)){
-            return ActionResult.PASS;
-        }
         int lasting = nbt.getInt(KEY);
 
         // excluding bad value
@@ -49,10 +45,6 @@ public class FireTouch implements CastOnEntityCallback, CastOnBlockCallback {
     @Override
     public ActionResult onBlock(ItemUsageContext context, NbtCompound nbt) {
 
-        if (!nbt.contains(KEY)){
-            return ActionResult.PASS;
-        }
-
         // copy from FlintAndSteelItem
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
@@ -65,5 +57,10 @@ public class FireTouch implements CastOnEntityCallback, CastOnBlockCallback {
             }
         }
         return ActionResult.PASS;
+    }
+
+    @Override
+    public String getKey() {
+        return KEY;
     }
 }

@@ -5,17 +5,20 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
+import slarper.pureason.spell.Spell;
 
-public interface CastOnBlockCallback {
+public interface CastOnBlockCallback extends Spell{
     Event<CastOnBlockCallback> EVENT = EventFactory.createArrayBacked(
             CastOnBlockCallback.class,
             (listeners) -> (context,nbt) ->{
 
                 for (CastOnBlockCallback listener : listeners){
-                    ActionResult result = listener.onBlock(context,nbt);
-                    // immediately return if the result != PASS.
-                    if(result!=ActionResult.PASS){
-                        return result;
+                    if (nbt.contains(listener.getKey())){
+                        ActionResult result = listener.onBlock(context,nbt);
+                        // immediately return if the result != PASS.
+                        if(result!=ActionResult.PASS){
+                            return result;
+                        }
                     }
                 }
 
