@@ -1,4 +1,4 @@
-package slarper.pureason.event;
+package slarper.pureason.spell;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -12,8 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import slarper.pureason.Pureason;
+import slarper.pureason.spell.event.CastOnBlockCallback;
+import slarper.pureason.spell.event.CastOnEntityCallback;
 
-public class FireTouch implements CastOnEntityCallback,CastOnBlockCallback {
+public class FireTouch implements CastOnEntityCallback, CastOnBlockCallback {
     private static final FireTouch SPELL = new FireTouch();
     private static final String KEY = "FireTouch";
 

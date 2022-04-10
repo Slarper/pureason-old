@@ -1,5 +1,6 @@
 package slarper.pureason.item;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -10,7 +11,8 @@ import net.minecraft.world.World;
 import slarper.pureason.item.util.UseActionHelper;
 
 public class PullableSpellItem extends SpellItem {
-    public static final String MAX_PULL_TIME = "maxTime";
+    public static final String USE_ACTION_KEY = "UseAction";
+    public static final String MAX_PULL_TIME = "MaxPullTime";
 
     public PullableSpellItem(Settings settings) {
         super(settings);
@@ -25,19 +27,19 @@ public class PullableSpellItem extends SpellItem {
         }
 
         NbtCompound nbt = stack.getNbt();
-        if(nbt==null || !nbt.contains(UseActionHelper.USE_ACTION_KEY)){
+        if(nbt==null || !nbt.contains(USE_ACTION_KEY)){
             return UseAction.NONE;
         }
 
-        String action = nbt.getString(UseActionHelper.USE_ACTION_KEY);
+        String action = nbt.getString(USE_ACTION_KEY);
         if (action.equals("")){
-            nbt.remove(UseActionHelper.USE_ACTION_KEY);
+            nbt.remove(USE_ACTION_KEY);
             return UseAction.NONE;
         }
 
         UseAction useAction = UseActionHelper.getUseAction(action);
         if (useAction == null){
-            nbt.remove(UseActionHelper.USE_ACTION_KEY);
+            nbt.remove(USE_ACTION_KEY);
             return UseAction.NONE;
         }
         return useAction;
@@ -56,6 +58,16 @@ public class PullableSpellItem extends SpellItem {
         // must call this method here to allow pulling.
         // because it will set entity.itemUseTimeLeft to stack.getMaxUseTime()
         user.setCurrentHand(hand);
-        return super.use(world, user, hand);
+        return TypedActionResult.pass(user.getStackInHand(hand));
+    }
+
+    @Override
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        if (! (user instanceof PlayerEntity)){
+            return;
+        }
+        PlayerEntity player = (PlayerEntity)user;
+
+        // fire event.
     }
 }

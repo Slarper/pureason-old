@@ -5,7 +5,6 @@ import net.minecraft.util.UseAction;
 import java.util.HashMap;
 
 public class UseActionHelper {
-    public static final String USE_ACTION_KEY = "UseAction";
     private static final HashMap<String, UseAction> map = new HashMap<>(){
         {
             put("none",UseAction.NONE);

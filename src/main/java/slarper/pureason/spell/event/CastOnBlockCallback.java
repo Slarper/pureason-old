@@ -1,4 +1,4 @@
-package slarper.pureason.event;
+package slarper.pureason.spell.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

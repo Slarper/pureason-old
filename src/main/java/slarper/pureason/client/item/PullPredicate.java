@@ -1,4 +1,4 @@
-package slarper.pureason.client.item.util;
+package slarper.pureason.client.item;
 
 import net.minecraft.client.item.UnclampedModelPredicateProvider;
 import net.minecraft.client.world.ClientWorld;
