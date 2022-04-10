@@ -10,6 +10,8 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import slarper.pureason.item.util.UseActionHelper;
 
+
+// Non-target spell
 public class PullableSpellItem extends SpellItem {
     public static final String USE_ACTION_KEY = "UseAction";
     public static final String MAX_PULL_TIME = "MaxPullTime";

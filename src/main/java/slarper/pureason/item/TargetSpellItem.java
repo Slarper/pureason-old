@@ -12,9 +12,9 @@ import slarper.pureason.spell.event.CastOnBlockCallback;
 import slarper.pureason.spell.event.CastOnEntityCallback;
 
 // Cantrips
-public class BaseSpellItem extends SpellItem{
+public class TargetSpellItem extends SpellItem{
 
-    public BaseSpellItem(Settings settings) {
+    public TargetSpellItem(Settings settings) {
         super(settings);
     }
 

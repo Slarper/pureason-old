@@ -19,6 +19,6 @@ public class PureasonItems {
     static {
         SPELL = register("spell", new SpellItem(new FabricItemSettings().maxCount(1)));
         PULLABLE_SPELL = register("pullable_spell",new PullableSpellItem(new FabricItemSettings().maxCount(1)));
-        BASE_SPELL = register("base_spell",new BaseSpellItem(new FabricItemSettings().maxCount(1)));
+        BASE_SPELL = register("base_spell",new TargetSpellItem(new FabricItemSettings().maxCount(1)));
     }
 }
