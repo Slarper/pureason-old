@@ -13,6 +13,8 @@ public interface CastOnBlockCallback extends Spell{
             (listeners) -> (context,nbt) ->{
 
                 for (CastOnBlockCallback listener : listeners){
+
+                    // only invoke listener when contains corresponding key.
                     if (nbt.contains(listener.getKey())){
                         ActionResult result = listener.onBlock(context,nbt);
                         // immediately return if the result != PASS.
