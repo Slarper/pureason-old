@@ -13,5 +13,4 @@ public class PureasonClient implements ClientModInitializer {
     public void onInitializeClient() {
         ModelPredicates.load();
     }
-
 }

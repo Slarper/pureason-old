@@ -9,9 +9,11 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.UseAction;
 import slarper.pureason.Pureason;
 import slarper.pureason.event.CastOnBlockCallback;
 import slarper.pureason.event.CastOnEntityCallback;
+import slarper.pureason.item.util.UseActionHelper;
 
 // Basic spell type, no restriction, no condition.
 // deprecated.
@@ -28,50 +30,19 @@ public class SpellItem extends Item {
             return super.getTranslationKey(stack);
         }
         NbtCompound nbt = stack.getNbt();
-        if (nbt!=null && nbt.contains(SPELL_ID_KEY)){
-            // if spell id is not properly specified, we will get ""
-            String name = nbt.getString(SPELL_ID_KEY);
-            if (name.equals("")){
-                nbt.remove(SPELL_ID_KEY);
-                Pureason.LOGGER.info("Spell Id is invalid.");
-            } else {
-                return name;
-            }
+        if (nbt==null || !nbt.contains(SPELL_ID_KEY)){
+            return super.getTranslationKey(stack);
         }
-        return super.getTranslationKey(stack);
+
+        // if spell id is not properly specified, we will get ""
+        String name = nbt.getString(SPELL_ID_KEY);
+        if (name.equals("")){
+            nbt.remove(SPELL_ID_KEY);
+            Pureason.LOGGER.info("Spell Id is invalid.");
+            return super.getTranslationKey(stack);
+        }
+        return name;
     }
 
-
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getPlayer() instanceof ClientPlayerEntity){
-            context.getPlayer().swingHand(context.getHand());
-        }
-        NbtCompound nbt = context.getStack().getOrCreateSubNbt("magic");
-        if (nbt!=null && !nbt.isEmpty()){
-            ActionResult result = CastOnBlockCallback.EVENT.invoker().onBlock(context,nbt);
-            if (result!=ActionResult.PASS){
-                return result;
-            }
-        }
-
-        return super.useOnBlock(context);
-    }
-
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (user instanceof ClientPlayerEntity){
-            user.swingHand(hand);
-        }
-
-        NbtCompound nbt = stack.getOrCreateSubNbt("magic");
-        if (nbt!=null && !nbt.isEmpty()){
-            ActionResult result = CastOnEntityCallback.EVENT.invoker().onEntity(stack,user,entity,hand,nbt);
-            if (result!=ActionResult.PASS){
-                return result;
-            }
-        }
-        return super.useOnEntity(stack, user, entity, hand);
-    }
 }
 

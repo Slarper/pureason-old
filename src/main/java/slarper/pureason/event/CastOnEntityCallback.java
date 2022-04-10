@@ -17,12 +17,11 @@ public interface CastOnEntityCallback {
 
                 for (CastOnEntityCallback listener : listeners){
                     ActionResult result = listener.onEntity(stack,user,entity,hand,nbt);
-
+                    // immediately return if the result != PASS.
                     if(result!=ActionResult.PASS){
                         return result;
                     }
                 }
-
                 return ActionResult.PASS;
             }
     );

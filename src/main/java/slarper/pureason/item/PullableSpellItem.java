@@ -1,22 +1,46 @@
 package slarper.pureason.item;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import slarper.pureason.item.util.UseActionHelper;
 
-public class PullableSpellItem extends Item {
+public class PullableSpellItem extends SpellItem {
+    public static final String MAX_PULL_TIME = "maxTime";
+
     public PullableSpellItem(Settings settings) {
         super(settings);
     }
 
+
     // body movement like drawing a bow (won't zoom in on the camera
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+        if (!stack.hasNbt()){
+            return UseAction.NONE;
+        }
+
+        NbtCompound nbt = stack.getNbt();
+        if(nbt==null || !nbt.contains(UseActionHelper.USE_ACTION_KEY)){
+            return UseAction.NONE;
+        }
+
+        String action = nbt.getString(UseActionHelper.USE_ACTION_KEY);
+        if (action.equals("")){
+            nbt.remove(UseActionHelper.USE_ACTION_KEY);
+            return UseAction.NONE;
+        }
+
+        UseAction useAction = UseActionHelper.getUseAction(action);
+        if (useAction == null){
+            nbt.remove(UseActionHelper.USE_ACTION_KEY);
+            return UseAction.NONE;
+        }
+        return useAction;
     }
 
 
@@ -32,7 +56,6 @@ public class PullableSpellItem extends Item {
         // must call this method here to allow pulling.
         // because it will set entity.itemUseTimeLeft to stack.getMaxUseTime()
         user.setCurrentHand(hand);
-
         return super.use(world, user, hand);
     }
 }

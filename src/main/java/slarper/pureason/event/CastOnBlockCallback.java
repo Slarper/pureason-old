@@ -13,7 +13,7 @@ public interface CastOnBlockCallback {
 
                 for (CastOnBlockCallback listener : listeners){
                     ActionResult result = listener.onBlock(context,nbt);
-
+                    // immediately return if the result != PASS.
                     if(result!=ActionResult.PASS){
                         return result;
                     }

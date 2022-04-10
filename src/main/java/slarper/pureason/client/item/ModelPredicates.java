@@ -1,20 +1,27 @@
 package slarper.pureason.client.item;
 
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
+import slarper.pureason.Pureason;
+import slarper.pureason.client.item.util.PullPredicate;
+import slarper.pureason.client.item.util.PullingPredicate;
+import slarper.pureason.item.PullableSpellItem;
 import slarper.pureason.item.PureasonItems;
 
 public class ModelPredicates {
     public static void load(){}
     static {
-        ModelPredicateProviderRegistry.register(PureasonItems.PULLABLE_SPELL, new Identifier("pull"), (stack, world, entity, seed) -> {
-            if (entity == null) {
-                return 0.0F;
-            }
-            return entity.getActiveItem() != stack ? 0.0F : (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0F;
-        });
+        // register "pull" for pullable_spell
+        ModelPredicateProviderRegistry.register(
+                PureasonItems.PULLABLE_SPELL,
+                new Identifier("pull"),
+                PullPredicate.PULL_PREDICATE);
 
-
-        ModelPredicateProviderRegistry.register(PureasonItems.PULLABLE_SPELL, new Identifier("pulling"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
+        // register "pulling" for pullable_spell
+        ModelPredicateProviderRegistry.register(
+                PureasonItems.PULLABLE_SPELL,
+                new Identifier("pulling"),
+                PullingPredicate.PULLING_PREDICATE);
     }
 }
