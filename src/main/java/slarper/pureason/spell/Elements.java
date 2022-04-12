@@ -1,6 +1,9 @@
 package slarper.pureason.spell;
 
-public class Spells {
+import slarper.pureason.spell.effect.Cure;
+import slarper.pureason.spell.effect.FireTouch;
+
+public class Elements {
     public static void load(){
         FireTouch.load();
         Cure.load();

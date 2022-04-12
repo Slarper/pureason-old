@@ -8,8 +8,8 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import slarper.pureason.spell.event.CastOnBlockCallback;
-import slarper.pureason.spell.event.CastOnEntityCallback;
+import slarper.pureason.spell.CastOnBlockCallback;
+import slarper.pureason.spell.CastOnEntityCallback;
 
 // Cantrips
 public class TargetSpellItem extends SpellItem{

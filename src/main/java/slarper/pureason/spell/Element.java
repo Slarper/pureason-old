@@ -1,6 +1,6 @@
 package slarper.pureason.spell;
 
-public interface Spell {
+public interface Element {
     default String getKey(){
         return "";
     }

@@ -1,11 +1,11 @@
-package slarper.pureason.spell;
+package slarper.pureason.spell.effect;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import slarper.pureason.spell.event.NonTargetCallback;
+import slarper.pureason.spell.NonTargetCallback;
 
 public class Cure implements NonTargetCallback{
     private static final Cure SPELL = new Cure();

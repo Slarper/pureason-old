@@ -1,4 +1,4 @@
-package slarper.pureason.spell.event;
+package slarper.pureason.spell;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -7,9 +7,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import slarper.pureason.spell.Spell;
 
-public interface NonTargetCallback extends Spell {
+public interface NonTargetCallback extends Element {
     Event<NonTargetCallback> EVENT = EventFactory.createArrayBacked(
             NonTargetCallback.class,
             (listeners) -> (world,user,hand,nbt) ->{

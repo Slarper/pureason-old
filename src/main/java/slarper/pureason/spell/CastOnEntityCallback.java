@@ -1,4 +1,4 @@
-package slarper.pureason.spell.event;
+package slarper.pureason.spell;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -9,9 +9,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
-import slarper.pureason.spell.Spell;
 
-public interface CastOnEntityCallback extends Spell {
+public interface CastOnEntityCallback extends Element {
     Event<CastOnEntityCallback> EVENT = EventFactory.createArrayBacked(
             CastOnEntityCallback.class,
             (listeners) -> (stack,user,entity,hand,nbt) ->{

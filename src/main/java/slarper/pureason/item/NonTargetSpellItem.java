@@ -7,7 +7,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import slarper.pureason.spell.event.NonTargetCallback;
+import slarper.pureason.spell.NonTargetCallback;
 
 // Cantrips
 public class NonTargetSpellItem extends SpellItem{

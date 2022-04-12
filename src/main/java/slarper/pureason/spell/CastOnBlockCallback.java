@@ -1,13 +1,12 @@
-package slarper.pureason.spell.event;
+package slarper.pureason.spell;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
-import slarper.pureason.spell.Spell;
 
-public interface CastOnBlockCallback extends Spell{
+public interface CastOnBlockCallback extends Element {
     Event<CastOnBlockCallback> EVENT = EventFactory.createArrayBacked(
             CastOnBlockCallback.class,
             (listeners) -> (context,nbt) ->{
