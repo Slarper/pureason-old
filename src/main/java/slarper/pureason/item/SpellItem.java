@@ -11,6 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import slarper.pureason.Pureason;
+import slarper.pureason.event.SpellUsableCallback;
 import slarper.pureason.event.SpellUseCallback;
 import slarper.pureason.event.SpellUseOnBlockCallback;
 import slarper.pureason.event.SpellUseOnEntityCallback;
@@ -21,15 +22,20 @@ public class SpellItem extends Item {
     private static final String SPELL_ID_KEY = "SpellId";
     public static final String MAGIC_KEY = "magic";
 
+    public SpellItem(Settings settings) {
+        super(settings);
+    }
+
+    public boolean isUsable(ItemStack stack, PlayerEntity user){
+        return SpellUsableCallback.EVENT.invoker().isUsable(stack, user);
+    }
+
     public void setStackSpellId(String spell_id, ItemStack stack){
         if (!(spell_id == null)){
             stack.getOrCreateNbt().putString(SPELL_ID_KEY,spell_id);
         }
     }
 
-    public SpellItem(Settings settings) {
-        super(settings);
-    }
 
     @Override
     public String getTranslationKey(ItemStack stack) {
@@ -53,17 +59,30 @@ public class SpellItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        return SpellUseOnBlockCallback.EVENT.invoker().useOnBlock(context);
+        if (isUsable(context.getStack(),context.getPlayer())){
+            return SpellUseOnBlockCallback.EVENT.invoker().useOnBlock(context);
+        } else {
+            return ActionResult.PASS;
+        }
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        return SpellUseCallback.EVENT.invoker().use(world,user,hand);
+
+        if (isUsable(user.getStackInHand(hand),user)){
+            return SpellUseCallback.EVENT.invoker().use(world,user,hand);
+        } else {
+            return TypedActionResult.pass(user.getStackInHand(hand));
+        }
     }
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        return SpellUseOnEntityCallback.EVENT.invoker().useOnEntity(stack, user, entity, hand);
+        if (isUsable(stack,user)){
+            return SpellUseOnEntityCallback.EVENT.invoker().useOnEntity(stack, user, entity, hand);
+        } else {
+            return ActionResult.PASS;
+        }
     }
 }
 
