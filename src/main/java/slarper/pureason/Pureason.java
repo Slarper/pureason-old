@@ -3,7 +3,6 @@ package slarper.pureason;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import slarper.pureason.spell.Elements;
 import slarper.pureason.item.PureasonItems;
 import slarper.pureason.spell.Spells;
 
@@ -22,7 +21,6 @@ public class Pureason implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		PureasonItems.load();
-		Elements.load();
 		Spells.load();
 	}
 }
